@@ -454,7 +454,7 @@ Five API incompatibilities were resolved during setup — see Appendix B of the 
 - **Carles Mateu Piñol** — thesis supervisor, access to DGX Spark infrastructure
 - **Cèsar Fernández Camón** — thesis supervisor
 - **Esther Solé i Martí** — art historian, ground truth management, eScriptorium, and HTR model expertise
-- **Màrius Bernadó** — musicologist, project coordination and contextualisation within digital humanities
+- **Màrius Josep Bernadó Tarragona** — musicologist, project coordination and contextualisation within digital humanities
 - [**GREiA Research Group**](https://greia.udl.cat/) — Universitat de Lleida, collaboration and support
 
 ---

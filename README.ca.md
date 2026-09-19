@@ -384,7 +384,7 @@ Consideracions:
 - **Carles Mateu** — director del treball i accés a la infraestructura DGX Spark
 - **Cèsar Fernández Camón** — co-director del treball
 - **Esther Solé i Martí** — historiadora de l'art, gestió del ground truth i eScriptorium
-- **Màrius Bernadó** — musicòleg, coordinació del projecte dins les humanitats digitals
+- **Màrius Josep Bernadó Tarragona** — musicòleg, coordinació del projecte dins les humanitats digitals
 - [**Grup de recerca GREiA**](https://greia.udl.cat/) — Universitat de Lleida, col·laboració i suport
 
 ---
