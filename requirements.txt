@@ -1,0 +1,9 @@
+# Pipeline dependencies (parsing, evaluation, data preparation)
+# Install: pip install -r requirements.txt
+
+lxml>=4.9
+Pillow>=10.0
+pandas>=2.0
+requests>=2.28
+pyyaml>=6.0
+escriptorium-connector>=0.2

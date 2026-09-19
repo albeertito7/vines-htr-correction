@@ -1,0 +1,28 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+benchmark/*
+!benchmark/.gitkeep
+data/*
+!data/.gitkeep
+
+# Models (published to HuggingFace separately)
+models/*
+!models/.gitkeep
+
+# Reference results (tracked)
+# results/ is NOT ignored
+
+logs/*
+!logs/.gitkeep
+*.log
+
+# Local config overrides (may contain tokens)
+configs/local_*.yaml
+
+.DS_Store
+!**/.gitkeep

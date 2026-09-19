@@ -1,0 +1,76 @@
+# ─────────────────────────────────────────────────────────────────────
+# Fine-tuning configuration — Model-agnostic
+# ─────────────────────────────────────────────────────────────────────
+#
+# Switching models is as simple as changing model.name.
+# Examples:
+#   model.name: "Qwen/Qwen3-8B"                     # Qwen 3 8B
+#   model.name: "meta-llama/Llama-3.1-8B-Instruct"   # Llama 3.1 8B
+#   model.name: "mistralai/Mistral-7B-Instruct-v0.3"  # Mistral 7B
+#   model.name: "google/gemma-3-27b-it"               # Gemma 3 27B
+#   model.name: "./models/local_model"                 # Local model
+#
+# Some models require an access token (Llama, Gemma).
+# Qwen and Mistral do not (Apache 2.0 / open licence).
+
+# ─── Model ────────────────────────────────────────────────────────────
+
+model:
+  # HuggingFace Hub model name, or local path to a directory
+  name: "Qwen/Qwen3-8B"
+
+  # Quantisation: null (standard LoRA, more VRAM), "4bit" (QLoRA, less VRAM)
+  quantization: null
+
+  # Access token for gated models (Llama, Gemma)
+  # Leave empty for open models (Qwen, Mistral)
+  access_token: ""
+
+  # Torch dtype: "auto", "bfloat16", "float16"
+  dtype: "auto"
+
+# ─── LoRA ─────────────────────────────────────────────────────────────
+
+lora:
+  r: 16               # Rank. Higher = more capacity, more VRAM. Typical: 8-64.
+  alpha: 32            # Scaling factor. Usually 2x the rank.
+  dropout: 0.05        # Regularisation. Typical: 0.0-0.1.
+  # Layers to adapt. These names are standard for most models
+  # (Llama, Qwen, Mistral, Gemma). Change here if a model uses
+  # different names.
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+# ─── Training ─────────────────────────────────────────────────────────
+
+training:
+  epochs: 3                          # Passes over the dataset. 3-5 typical for LoRA.
+  batch_size: 1                      # Per device. 1 for long texts (~2500 chars).
+  gradient_accumulation_steps: 8     # Effective batch = batch_size × grad_accum = 8.
+  learning_rate: 2.0e-4              # Standard for LoRA.
+  warmup_ratio: 0.05                 # 5% of training steps for warmup.
+  max_seq_length: 4096               # Adjust based on model and VRAM.
+  logging_steps: 10                  # Log loss every N steps.
+  save_strategy: "epoch"             # Save checkpoint after each epoch.
+  fp16: false
+  bf16: true                         # Recommended for modern hardware.
+  gradient_checkpointing: true       # Reduces VRAM at the cost of speed.
+
+# ─── Backend ──────────────────────────────────────────────────────────
+
+backend:
+  # "transformers" (standard) or "unsloth" (optimised, 2x faster)
+  engine: "transformers"
+
+# ─── Data paths ───────────────────────────────────────────────────────
+
+paths:
+  train: "data/finetuning/train.jsonl"
+  val: "data/finetuning/val.jsonl"
+  output: "models/finetuned"          # Fine-tuned model saved here

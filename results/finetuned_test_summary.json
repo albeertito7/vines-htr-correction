@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-09-06T21:34:19.157233",
+  "model_path": "models/finetuned",
+  "split": "data/finetuning/test.jsonl",
+  "pages_evaluated": 18,
+  "pages_improved": 16,
+  "pages_worsened": 0,
+  "cer_before": 0.10859,
+  "cer_after": 0.077993,
+  "cer_improvement_pct": 28.18,
+  "wer_before": 0.321363,
+  "wer_after": 0.199337,
+  "total_time_seconds": 1093.4
+}

@@ -1,0 +1,77 @@
+# ─────────────────────────────────────────────────────────────────────
+# Docker Compose — HTR post-correction pipeline (Ramon Viñes Diaries)
+# ─────────────────────────────────────────────────────────────────────
+#
+# Three services:
+#
+# 1. ollama — Serves local LLMs (Llama 3.1 70B, Mistral) with GPU.
+#    The pipeline connects via HTTP to send HTR text and receive
+#    corrections. Persistent: models are stored in the ollama_data volume.
+#
+# 2. pipeline — Python project code. Lightweight, no PyTorch.
+#    Parses XMLs, calls Ollama, computes metrics, generates reports.
+#    Source code is mounted as a volume: no rebuild needed per change.
+#
+# 3. kraken — HTR engine with Balakirev. Heavy (PyTorch + Kraken).
+#    Runs the model on page images to produce raw HTR output.
+#    Used once to generate data, then not needed again.
+#
+# Environment variable:
+#   RV_TRAINING_PATH  Path to RV-training repo (default: ~/RV-training)
+#
+# Usage:
+#   docker compose up -d ollama
+#   docker compose run pipeline src/parsers/alto_parser.py /rv-training/data/RV_1890/page_00005.xml
+#   docker compose run kraken -i /rv-training/data/RV_1890/page_00005.png ...
+# ─────────────────────────────────────────────────────────────────────
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+      - ./config.yaml:/app/config.yaml
+      - ./data:/data
+      - ./benchmark:/benchmark
+      - ./logs:/logs
+      - ${RV_TRAINING_PATH:-~/RV-training}:/rv-training:ro
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+    depends_on:
+      - ollama
+
+  kraken:
+    build:
+      context: .
+      dockerfile: Dockerfile.kraken
+    volumes:
+      - ./data:/data
+      - ${RV_TRAINING_PATH:-~/RV-training}:/rv-training:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  ollama_data:

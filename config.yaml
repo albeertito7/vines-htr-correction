@@ -1,0 +1,30 @@
+# ─────────────────────────────────────────────────────────────────────
+# Pipeline configuration
+# ─────────────────────────────────────────────────────────────────────
+
+# eScriptorium connection (optional, for uploading corrections)
+escriptorium:
+  url: ""
+  username: ""
+  password: ""
+
+# Data paths
+paths:
+  images: "data/images"
+  htr_output: "data/htr_output"
+  htr_raw: "data/htr_raw"
+  ground_truth: "/rv-training/data"
+  line_images: "data/line_images"
+  results: "benchmark/results"
+
+# LLM APIs (add the ones you need)
+llm:
+  anthropic_api_key: ""
+  google_api_key: ""
+  openai_api_key: ""
+  ollama_url: "http://localhost:11434"
+
+# Benchmark settings
+benchmark:
+  prompt_version: "v1"
+  context_lines: 5

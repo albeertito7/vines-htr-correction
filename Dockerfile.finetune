@@ -1,0 +1,39 @@
+# ─────────────────────────────────────────────────────────────────────
+# Dockerfile.finetune — Fine-tuning environment for DGX Spark
+# ─────────────────────────────────────────────────────────────────────
+#
+# Based on the official NVIDIA NGC image for DGX Spark (ARM64 + CUDA).
+# Follows the official playbook:
+# https://github.com/NVIDIA/dgx-spark-playbooks/tree/main/nvidia/pytorch-fine-tune
+#
+# DGX Spark notes (Blackwell, ARM64):
+#   - Flash Attention does not work, but PyTorch SDPA with cuDNN 9.13
+#     is faster on Blackwell anyway.
+#   - CUDA 13.0 + aarch64 is a rare combination — packages compiled
+#     for CUDA 12.x fail (libcudart.so.12 vs .13).
+#   - 128GB unified CPU/GPU memory — OOM can freeze the machine.
+#   - torchao 0.14.0 included in the NGC image is incompatible with
+#     PEFT (requires >=0.16.0), so we uninstall it.
+# ─────────────────────────────────────────────────────────────────────
+
+FROM nvcr.io/nvidia/pytorch:25.11-py3
+
+# Fine-tuning tools
+RUN pip install --no-cache-dir \
+    transformers \
+    peft \
+    trl \
+    accelerate \
+    datasets \
+    sentencepiece \
+    protobuf \
+    pyyaml \
+    safetensors \
+    lxml
+
+# Uninstall incompatible torchao (PEFT works without it)
+RUN pip uninstall -y torchao
+
+WORKDIR /app
+
+ENTRYPOINT ["python"]

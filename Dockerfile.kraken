@@ -1,0 +1,32 @@
+# ─────────────────────────────────────────────────────────────────────
+# Dockerfile.kraken — HTR engine for Balakirev output generation
+# ─────────────────────────────────────────────────────────────────────
+#
+# Heavy image including PyTorch + Kraken. Used to run the Balakirev
+# model on scanned diary page images and produce the raw HTR output
+# (with errors) in ALTO XML format.
+#
+# This output is needed to create the (erroneous text -> correct text)
+# pairs that feed the benchmark and LLM fine-tuning.
+#
+# Built once and used infrequently. Once all raw XMLs are generated,
+# this image is only needed again when the team adds new pages.
+#
+# Usage:
+#   docker compose run kraken -i /rv-training/data/RV_1890/page_00005.png \
+#     /output/page_00005.xml segment -bl ocr \
+#     -m /rv-training/models/FoNDUE-GD_es_v3_Balakirev.mlmodel
+# ─────────────────────────────────────────────────────────────────────
+
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir kraken
+
+WORKDIR /data
+
+ENTRYPOINT ["kraken"]

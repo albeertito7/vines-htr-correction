@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-08-30T19:14:31.545275",
+  "model": "FoNDUE-GD_es_v3_Balakirev",
+  "total_pages": 659,
+  "skipped": 0,
+  "global_cer": 0.175407,
+  "global_wer": 0.367268,
+  "total_chars": 1609961
+}
