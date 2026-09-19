@@ -23,19 +23,19 @@ FILTER_YEAR="${1:-}"
 FORCE="${2:-}"
 
 if [ ! -f "$RV_TRAINING/$MODEL" ]; then
-    echo "ERROR: No es troba el model Balakirev a $RV_TRAINING/$MODEL"
+    echo "ERROR: Not found Balakirev model at $RV_TRAINING/$MODEL"
     exit 1
 fi
 
-echo "=== Executant Balakirev sobre RV-training ==="
+echo "=== Executing Balakirev over RV-training ==="
 echo "Input:  $RV_TRAINING/data/"
 echo "Output: $OUTPUT_DIR/"
 echo "Model:  $MODEL"
 if [ -n "$FILTER_YEAR" ] && [ "$FILTER_YEAR" != "--force" ]; then
-    echo "Filtre: només $FILTER_YEAR"
+    echo "Filter: only $FILTER_YEAR"
 fi
 if [ "$FORCE" = "--force" ] || [ "$FILTER_YEAR" = "--force" ]; then
-    echo "Mode:   FORÇAT (re-processa tot)"
+    echo "Mode:   FORCE (re-processing all)"
 fi
 echo ""
 
