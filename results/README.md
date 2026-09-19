@@ -69,11 +69,8 @@ or obtained from the indicated sources:
 ## Model on HuggingFace
  
 The fine-tuned LoRA adapters are published on HuggingFace:
- 
-<!-- TODO: Update with actual HuggingFace URL after publication -->
-```
-albertperez/qwen3-8b-htr-vines-lora
-```
+
+[albertdatzira/qwen3-8b-htr-vines-lora](https://huggingface.co/albertdatzira/qwen3-8b-htr-vines-lora)
  
 Usage:
 ```python
@@ -81,5 +78,5 @@ from peft import PeftModel
 from transformers import AutoModelForCausalLM
  
 base = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-8B")
-model = PeftModel.from_pretrained(base, "albertperez/qwen3-8b-htr-vines-lora")
+model = PeftModel.from_pretrained(base, "albertdatzira/qwen3-8b-htr-vines-lora")
 ```
