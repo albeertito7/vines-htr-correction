@@ -50,7 +50,7 @@ logger = logging.getLogger(__name__)
 # ─── Prompt (must match fine-tuning; kept in Catalan) ────────────────────────────────────────────────────────────────────
 
 SYSTEM_PROMPT = (
-    "Ets un expert en post-correcció d'HTR dels diaris de Ramon Viñes. "
+    "Ets un expert en post-correcció d'HTR dels diaris de Ricard Viñes. "
     "Corregeix els errors de reconeixement del text manuscrit. "
     "Només corregeix errors d'HTR evidents. No modifiquis l'ortografia "
     "de l'autor, noms propis, ni símbols especials (¶, ¬, ⟦ ⟧). "

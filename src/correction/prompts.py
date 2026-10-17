@@ -2,7 +2,7 @@
 Prompt templates for LLM-based HTR post-correction.
 
 Each correction strategy uses a different prompt. All share a common context
-about the corpus (Ramon Viñes diaries, primarily in Spanish with French and
+about the corpus (Ricard Viñes diaries, primarily in Spanish with French and
 Catalan fragments, early 20th century manuscripts).
 
 The prompts are designed to minimise overcorrection: the LLM should only
@@ -21,7 +21,7 @@ Strategies:
 # Base context shared by all prompts
 CONTEXT_BASE = """Ets un expert en paleografia i lingüística del segle XX.
 Et passo text obtingut per HTR (reconeixement de text manuscrit) dels diaris \
-de Ramon Viñes, escrits principalment en castellà amb fragments en francès i català.
+de Ricard Viñes, escrits principalment en castellà amb fragments en francès i català.
 
 El text pot contenir errors de reconeixement: caràcters confosos (e/c, n/u, a/o, \
 i/l, m/n, t/f), paraules mal segmentades, accents incorrectes, o caràcters inventats.

@@ -1,6 +1,6 @@
 # Fine-tuning de LLMs per a post-correcció d'HTR
 
-## Els diaris manuscrits de Ramon Viñes (1890–1915)
+## Els diaris manuscrits de Ricard Viñes (1890–1915)
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -9,7 +9,7 @@
 
 > 📖 **[English README](README.md)**
 
-Pipeline complet per a la **post-correcció de text reconegut per HTR (Handwritten Text Recognition) mitjançant models de llenguatge (LLM) amb fine-tuning**, aplicat als diaris manuscrits del pianista català Ramon Viñes (1890–1915).
+Pipeline complet per a la **post-correcció de text reconegut per HTR (Handwritten Text Recognition) mitjançant models de llenguatge (LLM) amb fine-tuning**, aplicat als diaris manuscrits del pianista català Ricard Viñes (1890–1915).
 
 ### Resultat principal
 
@@ -51,7 +51,7 @@ Un LLM d'ús general (Llama 3.1 70B) **empitjora** la sortida HTR un 95% per sob
 
 ## Resum
 
-Els diaris de Ramon Viñes (1890–1943) són una font primària única per a la musicologia i la història cultural. El grup de recerca GReia de la Universitat de Lleida els digitalitza amb eScriptorium i un model Kraken fine-tuned (Balakirev, basat en FoNDUE-GD v3).
+Els diaris de Ricard Viñes (1890–1943) són una font primària única per a la musicologia i la història cultural. El grup de recerca GReia de la Universitat de Lleida els digitalitza amb eScriptorium i un model Kraken fine-tuned (Balakirev, basat en FoNDUE-GD v3).
 
 Balakirev aconsegueix un CER global del **17,54%** sobre 659 pàgines, amb variació entre anys (9,12%–29,95%). Aquest pipeline aplica post-correcció amb LLM per reduir els errors preservant l'ortografia irregular de l'autor ("brila", "dibajo", "murchachos" són formes intencionals, no errors d'HTR).
 
@@ -369,7 +369,7 @@ Consideracions:
 ```bibtex
 @mastersthesis{albert2026finetuning,
     title={Fine-tuning Large Language Models for HTR Post-correction:
-           A Case Study on the Ramon Viñes Manuscript Diaries},
+           A Case Study on the Ricard Viñes Manuscript Diaries},
     author={Pérez Datsira, Albert},
     school={Universitat de Lleida},
     year={2026},
@@ -395,4 +395,4 @@ Aquest projecte està llicenciat sota la [MIT License](LICENSE).
 
 El model base Qwen3-8B està llicenciat sota [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-Les imatges i transcripcions dels diaris de Ramon Viñes són gestionades pel grup GReia i no estan incloses en aquest repositori.
+Les imatges i transcripcions dels diaris de Ricard Viñes són gestionades pel grup GReia i no estan incloses en aquest repositori.
